@@ -74,8 +74,8 @@ public class FrgEstoque extends Fragment implements EstoqueView, AdapterView.OnI
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-        presenter.onItemLongClicked();
-        return false;
+        return presenter.onItemLongClicked(parent);
+
     }
 
     @Override

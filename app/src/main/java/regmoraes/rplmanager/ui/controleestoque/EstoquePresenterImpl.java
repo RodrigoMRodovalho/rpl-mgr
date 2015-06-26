@@ -19,55 +19,23 @@ import regmoraes.rplmanager.sistema.controleestoque.IEstoqueMgr;
 /**
  * Created by regmoraes on 17/06/15.
  */
-public class EstoquePresenterImpl implements EstoquePresenter {
+public class EstoquePresenterImpl implements EstoquePresenter,OnLoaderDataListener {
 
-    private Context context;
+    //private Context context;
     private EstoqueView estoqueView;
-    private IEstoqueMgr estoqueMgr;
+    //private IEstoqueMgr estoqueMgr;
+    private EstoqueIterator estoqueIterator;
 
     public EstoquePresenterImpl(FrgEstoque fragment) {
 
-        this.context = fragment.getActivity().getApplicationContext();
         this.estoqueView = fragment;
-        this.estoqueMgr = EstoqueMgr.getInstacia(context);
-
-        LoaderManager mLoaderManager = fragment.getLoaderManager();
-
-        int LOADER_ID = 1;
-        mLoaderManager.initLoader(LOADER_ID, null, this);
-    }
-
-    @Override
-    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new EstoqueLoader(context,estoqueMgr);
-    }
-
-    @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-
-        CursorAdapterProduto mCursorAdapterProduto =
-                new CursorAdapterProduto(context,data);
-
-        estoqueView.preencherListView(mCursorAdapterProduto);
-
-    }
-
-    @Override
-    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-
-        /* TODO */
+        estoqueIterator = new EstoqueIteratorImpl(fragment,this);
+        estoqueIterator.startLoader();
     }
 
 
     @Override
-    public void onItemLongClicked(int position) {
-
-
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public boolean onItemLongClicked(AdapterView<?> parent) {
         switch (parent.getId()){
 
             case R.id.listView_estoque:
@@ -81,6 +49,7 @@ public class EstoquePresenterImpl implements EstoquePresenter {
         return true;
     }
 
+
     @Override
     public void onMenuItemClicked(MenuItem item) {
 
@@ -90,6 +59,7 @@ public class EstoquePresenterImpl implements EstoquePresenter {
 
                 Fragment fragment = new FrgEstoque();
                 estoqueView.setFragment(fragment);
+
                 
                 break;
             default:break;
@@ -117,5 +87,10 @@ public class EstoquePresenterImpl implements EstoquePresenter {
 
         actionMode.getMenuInflater().inflate(R.menu.action_mode_estoque_item, menu);
         return true;
+    }
+
+    @Override
+    public void onSuccessLoadedData(CursorAdapterProduto cursorAdapterProduto) {
+        estoqueView.preencherListView(cursorAdapterProduto);
     }
 }

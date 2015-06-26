@@ -26,18 +26,7 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-
-            case R.id.button_confirmar_entrada:
-                dialogEntradaCallback();
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public void listClick(int position) {
         Fragment fragment = null;
 
         switch (position){
@@ -57,4 +46,15 @@ public class MainPresenterImpl implements MainPresenter {
 
         mainView.setFragment(fragment);
     }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.button_confirmar_entrada:
+                dialogEntradaCallback();
+        }
+    }
+
 }

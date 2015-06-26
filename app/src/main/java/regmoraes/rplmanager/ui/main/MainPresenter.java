@@ -6,12 +6,10 @@ import android.widget.AdapterView;
 /**
  * Created by regmoraes on 25/06/15.
  */
-public interface MainPresenter extends AdapterView.OnItemClickListener,View.OnClickListener{
+public interface MainPresenter{
 
-    @Override
-    void onItemClick(AdapterView<?> parent, View view, int position, long id);
+    void listClick(int position);
 
-    @Override
     void onClick(View v);
 
     void dialogEntradaCallback();

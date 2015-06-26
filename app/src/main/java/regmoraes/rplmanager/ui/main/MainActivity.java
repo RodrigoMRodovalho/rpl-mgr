@@ -10,6 +10,7 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -18,7 +19,7 @@ import regmoraes.rplmanager.R;
 import regmoraes.rplmanager.ui.controleestoque.FrgEstoque;
 
 
-public class MainActivity extends ActionBarActivity implements MainView {
+public class MainActivity extends ActionBarActivity implements MainView,View.OnClickListener,AdapterView.OnItemClickListener {
 
     private MainPresenter presenter;
     private Toolbar toolbar;
@@ -53,7 +54,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
                 android.R.layout.simple_list_item_1, leftSliderData);
 
         leftDrawerList.setAdapter(navigationDrawerAdapter);
-        leftDrawerList.setOnItemClickListener(presenter);
+        leftDrawerList.setOnItemClickListener(this);
     }
 
     private void iniciarDrawer() {
@@ -118,5 +119,15 @@ public class MainActivity extends ActionBarActivity implements MainView {
     public void startCAB(ActionMode.Callback callback) {
 
         startSupportActionMode(callback);
+    }
+
+    @Override
+    public void onClick(View view) {
+        presenter.onClick(view);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        presenter.listClick(position);
     }
 }
