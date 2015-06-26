@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RPL Manager</string>
+    <string name="menu_main">Menu</string>
+
+    <string name="navigation_drawer_item_1">Vendas</string>
+    <string name="navigation_drawer_item_2">Clientes</string>
+    <string name="navigation_drawer_item_3">Estoque</string>
+
+    <string name="navigation_drawer_open">Abrir Menu Lateral</string>
+    <string name="navigation_drawer_close">Fechar Menu Lateral</string>
+
+    <string name="action_editar">Editar</string>
+    <string name="action_excluir">Excluir</string>
+
+    <!-- View Estoque !-->
+    <string name="preco_custo">Preço de Custo da Caixa: </string>
+    <string name="qtd_pca">Peças: </string>
+    <string name="qtd_cx">Caixas: </string>
+
+</resources>
